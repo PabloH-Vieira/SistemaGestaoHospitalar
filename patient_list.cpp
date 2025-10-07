@@ -85,7 +85,17 @@ bool PatientList::removePatient(int id){
 }
 
 bool PatientList::searchPacient(int id, Pacient *p){
-//Como a nossa lista é ordenada, podemos fazer uma busca binária
+    if (id < 1 || id > tail -> pacient -> id) return false;
 
-
+    Node *aux = head;
+    while(aux != nullptr && id >= aux -> patient -> id){
+        if(id == aux -> patient -> id){
+            p = aux -> patient;
+            return true;
+        }
+        aux = aux -> next;
+    }
+    //Se não encontrar o paciente, retorna false
+    if (aux == nullptr || id < aux -> patient -> id)
+        return false;
 }

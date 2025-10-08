@@ -14,7 +14,7 @@ typedef struct NodeList{
         next = nullptr;
         prev = nullptr;
     }
-}Node;
+}NodeList;
 
 //Guarda as informações dos pacientes e o histórico de tratamento
 //Dinâmica e ordenada por id
@@ -31,10 +31,10 @@ typedef struct PatientList{
     //MÉTODOS
     bool isEmpty();
     int getID(); //Identfica o próximo ID disponível
-    bool addPatient(char name[100], int id);
-    bool searchPacient(int id, Patient *p);
+    bool addPatient(char name[100]);
+    bool searchPatient(int id, NodeList *p);
     bool removePatient(int id);
-    void printPacient(int id);
+    void printPatient(int id);
     void printAll();
 
 }PatientList;

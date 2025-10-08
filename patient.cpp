@@ -7,7 +7,7 @@ Patient::Patient() {
 }
 
 //Destrutor
-~Patient::Patient() {}
+Patient::~Patient() {}
 
 void Patient::set(char new_name[], int new_id){
     std::string p = new_name;
@@ -19,6 +19,6 @@ std::string Patient::get(){
     return name;
 }
 
-int getID(){
+int Patient::getID(){
     return id;
 }

@@ -2,7 +2,7 @@
 #include <string>
 
 typedef struct NodeH{
-    std::string procedure[10]; //Matriz de procedimentos
+    std::string procedure; //Matriz de procedimentos
     struct NodeH *next;
 
 
@@ -10,9 +10,8 @@ typedef struct NodeH{
         next = nullptr;
     }
 
-    bool set(char p[10]){
-        std::string procedure = p;
-        procedure = procedure;
+    bool set(std::string p){
+        procedure = p;
         return true;
     }
 }NodeH;
@@ -28,9 +27,9 @@ typedef struct history{
 
     bool isEmpty();
     bool isFull();
-    bool insertProcedure(char procedure[10]);
-    bool removeProcedure(char procedure[10]);
-    bool searchProcedure(char procedure[10]);
+    bool insertProcedure(std::string procedure);
+    bool removeProcedure(std::string procedure);
+    bool searchProcedure(std::string procedure);
     void printProcedures();
 }History;
 

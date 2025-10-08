@@ -7,7 +7,7 @@ history::history(){
 }
 
 bool isEmpty::history(){
-    if qtd == 0 : return true ? return false;
+    if (qtd == 0) : return true ? return false;
 }
 
 //Destrutor
@@ -63,3 +63,8 @@ bool searchProcedure::history(char procedure[10]){
     return false;
 }
 
+void printProcedures::history(){
+    for (int i = 0; i < qtd_procedures; i++){
+        printf("%s\n", top -> procedure);
+    }
+}

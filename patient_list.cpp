@@ -7,10 +7,10 @@ PatientList::PatientList(){
 }
 
 PatientList::~PatientList(){
-    Node *aux;
+    NodeList *aux;
     aux = head;
     while(aux != nullptr){
-        Node *p = aux;
+        NodeList *p = aux;
         aux = aux->next;
         delete p;
         qtd--;
@@ -33,7 +33,7 @@ bool PatientList::addPatient(char name[100]){
     id = getID();
     patient->set(name, id); //Adicione o nome e o ID ao paciente
 
-    Node *no = new Node;
+    NodeList *no = new NodeList;
     no -> patient = *patient;
     no -> next = nullptr;
     if (isEmpty()) head = no;
@@ -48,7 +48,7 @@ bool PatientList::removePatient(int id){
 
     //Remove o primeiro paciente da lista
     if (id == head -> patient -> id){
-        Node *p = head;
+        NodeList *p = head;
         head = p -> next;
         //Se houver apenas um paciente
         if (head -> prox == nullptr)
@@ -61,7 +61,7 @@ bool PatientList::removePatient(int id){
 
     //Remove o último paciente da lista
     if (id == tail -> patient -> id){
-        Node *p = tail;
+        NodeList *p = tail;
         tail = p -> prev;
         //Se a lista tiver somente um paciente
         if (head -> prox == nullptr)
@@ -87,7 +87,7 @@ bool PatientList::removePatient(int id){
 bool PatientList::searchPacient(int id, Pacient *p){
     if (id < 1 || id > tail -> pacient -> id) return false;
 
-    Node *aux = head;
+    NodeList *aux = head;
     while(aux != nullptr && id >= aux -> patient -> id){
         if(id == aux -> patient -> id){
             p = aux -> patient;
@@ -104,5 +104,5 @@ void printPacient(int id){
     Pacient *p = searchPacient(id);
     printf("Nome do paciente: %s\n", p -> get());
     printf("ID do paciente: %d\n", p -> getID()););
-    printf("Historico de procedimentos: %s\n", p -> history);
+    printf("Historico de procedimentos: %s\n", p -> history.printProcedures());
 }

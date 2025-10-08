@@ -1,31 +1,16 @@
 #ifndef PATIENT_LIST_H
 #define PATIENT_LIST_H
-#include "history.h"
+#include "patient.h"
+#include <string>
 
-typedef struct patient{
-    char name[100];
-    int id;
-	History history;
-
-    void set(char name[100], int id){
-        name = name;
-        id = id;
-    }
-    char get(){
-        return name;
-    }
-    int getID(){
-        return id;
-    }
-}
 //Nó para a lista de pacientes
-typedef struct Node(){
+typedef struct NodeList{
     Patient patient;
-    Node *next;
-    Node *prev;
+    struct NodeList *next;
+    struct NodeList *prev;
 
     //Define valores pré-definidos
-    Node(){
+    NodeList(){
         next = nullptr;
         prev = nullptr;
     }
@@ -34,8 +19,8 @@ typedef struct Node(){
 //Guarda as informações dos pacientes e o histórico de tratamento
 //Dinâmica e ordenada por id
 typedef struct PatientList{
-    Node *head;
-    Node *tail;
+    NodeList *head;
+    NodeList *tail;
     int qtd;
 
     //Construtor
@@ -47,7 +32,7 @@ typedef struct PatientList{
     bool isEmpty();
     int getID(); //Identfica o próximo ID disponível
     bool addPatient(char name[100], int id);
-    bool searchPacient(int id, Pacient *p);
+    bool searchPacient(int id, Patient *p);
     bool removePatient(int id);
     void printPacient(int id);
     void printAll();

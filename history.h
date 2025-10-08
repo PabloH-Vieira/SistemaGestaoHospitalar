@@ -1,22 +1,25 @@
 #ifndef HISTORY_H
+#include <string>
 
-typedef struct NodeH(int id){
-    char procedure[10]; //Matriz de procedimentos
-    Node *next;
+typedef struct NodeH{
+    std::string procedure[10]; //Matriz de procedimentos
+    struct NodeH *next;
+
 
     NodeH(){
         next = nullptr;
-        qtd = 0;
     }
 
     bool set(char p[10]){
-        procedure = p;
+        std::string procedure = p;
+        procedure = procedure;
+        return true;
     }
 }NodeH;
 
-typedef struct history(int size){
+typedef struct history{
     int cont_procedures; //Deve chegar no máximo a 10 procedimentos
-    Node *top;
+    NodeH *top;
 
     //Construtor
     history();
@@ -28,6 +31,7 @@ typedef struct history(int size){
     bool insertProcedure(char procedure[10]);
     bool removeProcedure(char procedure[10]);
     bool searchProcedure(char procedure[10]);
+    void printProcedures();
 }History;
 
 #define HISTORY_H

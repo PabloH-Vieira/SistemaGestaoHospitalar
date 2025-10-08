@@ -1,19 +1,15 @@
 #ifndef WAIT_LIST_H
 #define WAIT_LIST_H
+#include "patient.h"
 
-typedef struct patient{
-    string name;
-    int id;
-}Patient;
-
-typedef struct Node(){
+typedef struct NodeHeap{
     Patient patient;
-    Node *next;
-}Node;
+    struct NodeHeap *next;
+}NodeHeap;
 
-typedef struct WaitList(){
-    Node *head;
-    Node *tail;
+typedef struct WaitList{
+    NodeHeap *head;
+    NodeHeap *tail;
     int size;
 
     //Construtor

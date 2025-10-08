@@ -99,3 +99,10 @@ bool PatientList::searchPacient(int id, Pacient *p){
     if (aux == nullptr || id < aux -> patient -> id)
         return false;
 }
+
+void printPacient(int id){
+    Pacient *p = searchPacient(id);
+    printf("Nome do paciente: %s\n", p -> get());
+    printf("ID do paciente: %d\n", p -> getID()););
+    printf("Historico de procedimentos: %s\n", p -> history);
+}

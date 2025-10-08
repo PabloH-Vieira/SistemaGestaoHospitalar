@@ -1,27 +1,6 @@
 #ifndef PATIENT_LIST_H
 #define PATIENT_LIST_H
-
-typedef struct NodeH(int id){
-    char procedure[10];
-    int id;
-    Node *next;
-    Node *prev;
-}NodeH;
-
-typedef struct history(int size){
-	int cont_procedures; //Deve chegar no máximo a 10 procedimentos
-    Node *head;
-    //Construtor
-    history();
-    //Destrutor
-    ~history();
-
-    bool insertProcedure(char procedure[10]);
-    bool removeProcedure(char procedure[10]);
-    bool searchProcedure(char procedure[10]);
-    bool historyIsEmpty();
-    bool historyIsFull();
-}History;
+#include "history.h"
 
 typedef struct patient{
     char name[100];
@@ -35,8 +14,10 @@ typedef struct patient{
     char get(){
         return name;
     }
-}Patient;
-
+    int getID(){
+        return id;
+    }
+}
 //Nó para a lista de pacientes
 typedef struct Node(){
     Patient patient;

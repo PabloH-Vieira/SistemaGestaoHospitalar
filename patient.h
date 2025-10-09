@@ -1,6 +1,7 @@
 #ifndef PATIENT_H
 #define PATIENT_H
 #include "history.h"
+#include <string>
 
 typedef struct Patient{
     std::string name;
@@ -9,9 +10,9 @@ typedef struct Patient{
 
     Patient();
     ~Patient();
-    void set(char new_name[], int new_id);
+    void set(const char* new_name, int new_id);
     std::string get();
     int getID();
-}Patient;
+} Patient;
 
-#endif //PATIENT_H
+#endif

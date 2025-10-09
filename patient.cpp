@@ -1,4 +1,5 @@
 #include "patient.h"
+#include <string>
 
 //Construtor
 Patient::Patient() {
@@ -9,9 +10,8 @@ Patient::Patient() {
 //Destrutor
 Patient::~Patient() {}
 
-void Patient::set(char new_name[], int new_id){
-    std::string p = new_name;
-    name = p;
+void Patient::set(const char* new_name, int new_id){
+    name = new_name;
     id = new_id;
 }
 

@@ -1,5 +1,7 @@
 #include "patient_list.h"
 #include <string>
+#include <cstdio>
+
 
 PatientList::PatientList(){
     head = nullptr;
@@ -8,105 +10,104 @@ PatientList::PatientList(){
 }
 
 PatientList::~PatientList(){
-    NodeList *aux;
-    aux = head;
-    while(aux != nullptr){
-        NodeList *p = aux;
-        aux = aux->next;
-        delete p;
-        qtd--;
+    NodeList *current = head;
+    while(current != nullptr){
+        NodeList *next = current->next;
+        delete current;
+        current = next;
     }
 }
 
 bool PatientList::isEmpty(){
-    if (qtd == 0) return true; else return false;
+    return qtd == 0;
 }
 
 int PatientList::getID(){
     if (isEmpty()) return 1;
-    return tail -> patient.id + 1;
+    return tail->patient.id + 1;
 }
 
 
 //Adiciona um paciente no fim da lista
-bool PatientList::addPatient(char name[100]){
-    Patient *patient = new Patient; //Cria um novo paciente
+bool PatientList::addPatient(const char* name){
+    Patient new_patient; //Cria um novo paciente
     int id = getID();
-    patient->set(name, id); //Adicione o nome e o ID ao paciente
+    new_patient.set(name, id); //Adicione o nome e o ID ao paciente
 
-    NodeList *no = new NodeList;
-    no -> patient = *patient;
-    no -> next = nullptr;
-    if (isEmpty()) head = no;
-    tail -> next = no;
-    tail = no;
+    NodeList *newNode = new NodeList;
+    newNode->patient = new_patient;
+
+    if (isEmpty()) {
+        head = newNode;
+        tail = newNode;
+    } else {
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
+    }
     qtd++;
     return true;
 }
 
-bool PatientList::searchPatient(int id, NodeList *p){
-    if (isEmpty() || id < 1 || id > qtd) return false;
-    if (id < 1 || id > tail -> patient.id) return false;
+
+bool PatientList::searchPatient(int id, NodeList*& p_out){
+    if (isEmpty() || id < 1) return false;
 
     NodeList *aux = head;
-    while(aux != nullptr && id >= aux -> patient.id){
-        if(id == aux -> patient.id){
-            p = aux;
+    while(aux != nullptr){
+        if(id == aux->patient.id){
+            p_out = aux;
             return true;
         }
-        aux = aux -> next;
+        aux = aux->next;
     }
     //Se não encontrar o paciente, retorna false
-    if (aux == nullptr || id < aux -> patient.id)
-        return false;
+    p_out = nullptr;
+    return false;
 }
 
+// (mudei bastante, tava dando segfault por qualquer coisa -_-)
 bool PatientList::removePatient(int id){
-    if (isEmpty() || id < 1 || id > qtd) return false;
-
-    //Remove o primeiro paciente da lista
-    if (id == head -> patient.id){
-        NodeList *p = head;
-        head = p -> next;
-        //Se houver apenas um paciente
-        if (head -> next == nullptr)
-            tail = nullptr;
-        else head -> prev = nullptr;
-        delete p;
-        qtd--;
-        return true;
+    NodeList *node_to_remove = nullptr;
+    // para se nao encontrar
+    if (!searchPatient(id, node_to_remove) || node_to_remove == nullptr) {
+        return false;
     }
 
-    //Remove o último paciente da lista
-    if (id == tail -> patient.id){
-        NodeList *p = tail;
-        tail = p -> prev;
-        //Se a lista tiver somente um paciente
-        if (head -> next == nullptr)
-            head = nullptr;
-        else tail -> next = nullptr;
-        delete p;
-        qtd--;
-        return true;
+    // reorganiza ponteiros
+    if (node_to_remove->prev != nullptr) {
+        node_to_remove->prev->next = node_to_remove->next;
     }
 
-    //Demais casos
-    NodeList *p = new NodeList; //Cria um ponteiro para o nó do paciente
-    searchPatient(id, p);
+    if (node_to_remove->next != nullptr) {
+        node_to_remove->next->prev = node_to_remove->prev;
+    }
 
-    NodeList *aux = p -> prev; //Nó anterior do paciente a ser removido
-    //Remove as ligações com o paciente a ser removido
-    aux -> next = p -> next;
-    p -> next -> prev = aux;
-    delete p;
+    if (node_to_remove == head) {
+        head = node_to_remove->next;
+    }
+
+    if (node_to_remove == tail) {
+        tail = node_to_remove->prev;
+    }
+
+    // deleta node e atualiza qtd
+    delete node_to_remove;
+    qtd--;
     return true;
 }
 
-void PatientList::printPatient(int id){
-    NodeList *p;
-    searchPatient(id, p);
-    printf("Nome do paciente: %s\n", p -> patient.get());
-    printf("ID do paciente: %d\n", p -> patient.getID());;
-    printf("Historico de procedimentos: \n");
-    p -> patient.history.printProcedures();
+    // (mudei pra ficar mais bem dividido quando printa)
+void PatientList::printPatientHistory(int id){
+    NodeList *p = nullptr;
+    if (searchPatient(id, p)) {
+        printf("\n--- Historico Medico ---\n");
+        printf("ID do paciente: %d\n", p->patient.getID());
+        printf("Nome do paciente: %s\n", p->patient.get().c_str());
+        printf("Procedimentos: \n");
+        p->patient.history.printProcedures();
+        printf("------------------------\n");
+    } else { // adicionei caso de erro
+        printf("ERRO: Paciente com ID %d nao encontrado.\n", id);
+    }
 }

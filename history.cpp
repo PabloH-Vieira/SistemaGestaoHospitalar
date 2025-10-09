@@ -1,24 +1,11 @@
 #include "history.h"
 #include <string>
+#include <iostream>
 
 //Construtor
 history::history(){
     top = nullptr;
-}
-
-bool history::isEmpty(){
-    if (cont_procedures == 0) return true; else return false;
-}
-
-bool history::removeProcedure(std::string procedure){
-    if (isEmpty()) return false;
-    if (top -> procedure != procedure) return false;
-
-    NodeH *aux = top;
-    top = top -> next;
-    delete aux;
-    cont_procedures--;
-    return true;
+    cont_procedures = 0;
 }
 
 //Destrutor
@@ -28,45 +15,55 @@ history::~history(){
         top = top -> next;
         delete aux;
     }
-    delete top;
     cont_procedures = 0;
 }
 
+bool history::isEmpty(){
+    return cont_procedures == 0;
+}
+
 bool history::isFull(){
-    if (cont_procedures == 10) return true; else return false;
+    // a quantidade de procedimentos maximo eh 10
+    return cont_procedures >= 10;
 }
 
 bool history::insertProcedure(std::string procedure){
     if (isFull()) return false;
 
     NodeH *p = new NodeH;
-    p -> set(procedure);
-    if (isEmpty()){
-        top = p;
-        top -> next = nullptr;
-        cont_procedures++;
-        return true;
-    }
+    p->set(procedure);
 
-    p-> next = top;
+    p->next = top;
     top = p;
     cont_procedures++;
     return true;
 }
 
-bool history::searchProcedure(std::string procedure){
-    //Percorre todas as linhas
-    for (int i = 0; i < cont_procedures; i++){
-        //Usamos a classe string para comparar os procedimentos
-        std::string s2 = top -> procedure;
-        if (procedure == s2) return true;
+// remove o procedimento do topo da pilha (LIFO) e retorna
+std::string history::undoProcedure(){
+    if (isEmpty()) {
+        return ""; // Retorna string vazia se não houver o que remover
     }
-    //Se percorreu todas as linhas e não encontrar o procedimento, retorna false
-    return false;
+
+    NodeH *aux = top;
+    std::string procedure = top->procedure;
+    top = top->next;
+
+    delete aux;
+    cont_procedures--;
+    return procedure;
 }
 
 void history::printProcedures(){
-    for (int i = 0; i < cont_procedures; i++){
-        printf("%p\n", top -> procedure);
+    if(isEmpty()){
+        printf("Nenhum procedimento no historico.\n");
+        return;
+    }
+    NodeH* current = top;
+    int count = 1;
+    while(current != nullptr){
+        printf("  %d. %s\n", count, current->procedure.c_str());
+        current = current->next;
+        count++;
     }
 }

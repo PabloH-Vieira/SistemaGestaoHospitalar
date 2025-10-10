@@ -1,0 +1,38 @@
+[
+{
+  "directory": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\hospital.dir\\interface.cpp.obj -c \"C:\\Users\\pablo\\Estudos USP\\2o Semestre\\Alg. e Estr. de Dados\\hospital\\interface.cpp\"",
+  "file": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/interface.cpp",
+  "output": "CMakeFiles/hospital.dir/interface.cpp.obj"
+},
+{
+  "directory": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\hospital.dir\\patient_list.cpp.obj -c \"C:\\Users\\pablo\\Estudos USP\\2o Semestre\\Alg. e Estr. de Dados\\hospital\\patient_list.cpp\"",
+  "file": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/patient_list.cpp",
+  "output": "CMakeFiles/hospital.dir/patient_list.cpp.obj"
+},
+{
+  "directory": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\hospital.dir\\patient.cpp.obj -c \"C:\\Users\\pablo\\Estudos USP\\2o Semestre\\Alg. e Estr. de Dados\\hospital\\patient.cpp\"",
+  "file": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/patient.cpp",
+  "output": "CMakeFiles/hospital.dir/patient.cpp.obj"
+},
+{
+  "directory": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\hospital.dir\\history.cpp.obj -c \"C:\\Users\\pablo\\Estudos USP\\2o Semestre\\Alg. e Estr. de Dados\\hospital\\history.cpp\"",
+  "file": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/history.cpp",
+  "output": "CMakeFiles/hospital.dir/history.cpp.obj"
+},
+{
+  "directory": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\hospital.dir\\wait_list.cpp.obj -c \"C:\\Users\\pablo\\Estudos USP\\2o Semestre\\Alg. e Estr. de Dados\\hospital\\wait_list.cpp\"",
+  "file": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/wait_list.cpp",
+  "output": "CMakeFiles/hospital.dir/wait_list.cpp.obj"
+},
+{
+  "directory": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\hospital.dir\\io.cpp.obj -c \"C:\\Users\\pablo\\Estudos USP\\2o Semestre\\Alg. e Estr. de Dados\\hospital\\io.cpp\"",
+  "file": "C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/io.cpp",
+  "output": "CMakeFiles/hospital.dir/io.cpp.obj"
+}
+]

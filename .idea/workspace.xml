@@ -17,20 +17,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26fd01f6-729c-4324-b0e8-922b57c0581e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/hospital.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hospital.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/history.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history.h" beforeDir="false" afterPath="$PROJECT_DIR$/history.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/interface.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/patient.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient_list.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/patient_list.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient_list.h" beforeDir="false" afterPath="$PROJECT_DIR$/patient_list.h" afterDir="false" />
-    </list>
+    <list default="true" id="26fd01f6-729c-4324-b0e8-922b57c0581e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1759963664249</updated>
-      <workItem from="1759963665822" duration="2894000" />
+      <workItem from="1759963665822" duration="3331000" />
     </task>
     <servers />
   </component>

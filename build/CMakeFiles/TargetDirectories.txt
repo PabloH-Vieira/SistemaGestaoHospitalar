@@ -1,0 +1,3 @@
+C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/build/CMakeFiles/hospital.dir
+C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/build/CMakeFiles/edit_cache.dir
+C:/Users/pablo/Estudos USP/2o Semestre/Alg. e Estr. de Dados/hospital/build/CMakeFiles/rebuild_cache.dir

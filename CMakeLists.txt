@@ -8,4 +8,6 @@ add_executable(hospital
         patient_list.cpp
         patient.cpp
         history.cpp
+        wait_list.cpp
+        io.cpp
 )

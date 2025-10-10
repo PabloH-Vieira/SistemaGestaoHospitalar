@@ -4,6 +4,7 @@
 // no maximo 42 vagas na emergencia do hospital
 #define MAX_WAIT_LIST_SIZE 42
 
+//Construtor
 WaitList::WaitList(){
     head = nullptr;
     tail = nullptr;
@@ -11,6 +12,7 @@ WaitList::WaitList(){
     max_size = MAX_WAIT_LIST_SIZE;
 }
 
+//Destrutor
 WaitList::~WaitList(){
     NodeHeap *current = head;
     while(current != nullptr){
@@ -22,6 +24,7 @@ WaitList::~WaitList(){
     size = 0;
 }
 
+
 bool WaitList::full(){
     return size >= max_size;
 }
@@ -30,7 +33,8 @@ bool WaitList::empty(){
     return size == 0;
 }
 
-// adiciona paciente no final da fila
+// Pré-condição: A lista de espera não está cheia. 'p' é um paciente válido.
+// Pós-condição: O paciente é adicionado ao final da fila e retorna true. Se a fila estiver cheia, retorna false.
 bool WaitList::addPatient(Patient p){
     if (full()) {
         printf("ERRO: Fila de espera esta cheia!\n");
@@ -53,7 +57,9 @@ bool WaitList::addPatient(Patient p){
     return true;
 }
 
-// remove paciente do inicio, se der erro volta null
+// Pré-condição: A pilha existe.
+// Pós-condição: Se a fila não estiver vazia, remove e retorna o primeiro paciente. Caso contrário, retorna um ...
+// ... paciente vazio.
 Patient WaitList::removePatient(){
     if (empty()) {
         Patient emptyPatient;
@@ -74,7 +80,8 @@ Patient WaitList::removePatient(){
     return removedPatient;
 }
 
-// imprime a fila de espera
+// Pré-condição: A pilha existe.
+// Pós-condição: Imprime os pacientes na fila de espera.
 void WaitList::printWaitList() {
     if (empty()) {
         printf("\nFila de espera esta vazia.\n");
@@ -93,7 +100,8 @@ void WaitList::printWaitList() {
 }
 
 
-// checa existencia
+// Pré-condição: A pilha existe e 'id' é um inteiro válido (maior ou igual a 0).
+// Pós-condição: Retorna true se um paciente com o ID especificado for encontrado, false caso contrário.
 bool WaitList::searchPatient(int id) {
     if (empty()) {
         return false;

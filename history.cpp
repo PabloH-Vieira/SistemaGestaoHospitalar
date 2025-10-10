@@ -23,10 +23,13 @@ bool history::isEmpty(){
 }
 
 bool history::isFull(){
-    // a quantidade de procedimentos maximo eh 10
+    // a quantidade de procedimentos maximo é 10
     return cont_procedures >= 10;
 }
 
+// Pré-condição: O histórico foi criado.
+// Pós-condição: O procedimento é inserido no topo do histórico e retorna true. Se o histórico estiver cheio, ...
+// ... retorna false.
 bool history::insertProcedure(std::string procedure){
     if (isFull()) return false;
 
@@ -39,7 +42,9 @@ bool history::insertProcedure(std::string procedure){
     return true;
 }
 
-// remove o procedimento do topo da pilha (LIFO) e retorna
+// Pré-condição: O histórico foi criado.
+// Pós-condição: Se o histórico não estiver vazio, o procedimento do topo é removido e retornado.
+// ... caso contrário, retorna uma string vazia.
 std::string history::undoProcedure(){
     if (isEmpty()) {
         return ""; // Retorna string vazia se não houver o que remover
@@ -54,6 +59,8 @@ std::string history::undoProcedure(){
     return procedure;
 }
 
+// Pré-condição: O histórico foi criado.
+// Pós-condição: Os procedimentos do histórico são impressos na tela.
 void history::printProcedures(){
     if(isEmpty()){
         printf("Nenhum procedimento no historico.\n");

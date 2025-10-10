@@ -2,13 +2,14 @@
 #include <string>
 #include <cstdio>
 
-
+//Construtor
 PatientList::PatientList(){
     head = nullptr;
     tail = nullptr;
     qtd = 0;
 }
 
+//Destrutor
 PatientList::~PatientList(){
     NodeList *current = head;
     while(current != nullptr){
@@ -17,18 +18,23 @@ PatientList::~PatientList(){
         current = next;
     }
 }
-
+// Pré-condição: A lista existe.
+// Pós-condição: Retorna true se a lista estiver vazia, false caso contrário.
 bool PatientList::isEmpty(){
     return qtd == 0;
 }
 
+
+// Pré-condição: A lista existe.
+// Pós-condição: Retorna o próximo ID de paciente disponível.
 int PatientList::getID(){
     if (isEmpty()) return 1;
     return tail->patient.id + 1;
 }
 
 
-//Adiciona um paciente no fim da lista
+// Pré-condição: 'name' é um ponteiro válido para uma string C.
+// Pós-condição: Um novo paciente é adicionado ao final da lista e retorna true.
 bool PatientList::addPatient(const char* name){
     Patient new_patient; //Cria um novo paciente
     int id = getID();
@@ -49,7 +55,9 @@ bool PatientList::addPatient(const char* name){
     return true;
 }
 
-
+// Pré-condição: 'id' é o ID a ser pesquisado. 'p_out' é uma referência a um ponteiro NodeList.
+// Pós-condição: Se o paciente for encontrado, 'p_out' aponta para o nó do paciente e retorna true. Caso contrário, ...
+// ... 'p_out' é nullptr e retorna false.
 bool PatientList::searchPatient(int id, NodeList*& p_out){
     if (isEmpty() || id < 1) return false;
 
@@ -66,7 +74,8 @@ bool PatientList::searchPatient(int id, NodeList*& p_out){
     return false;
 }
 
-// (mudei bastante, tava dando segfault por qualquer coisa -_-)
+// Pré-condição: 'id' é o ID do paciente a ser removido.
+// Pós-condição: Se o paciente for encontrado, ele é removido da lista e retorna true. Caso contrário, retorna false.
 bool PatientList::removePatient(int id){
     NodeList *node_to_remove = nullptr;
     // para se nao encontrar
@@ -97,7 +106,9 @@ bool PatientList::removePatient(int id){
     return true;
 }
 
-    // (mudei pra ficar mais bem dividido quando printa)
+// Pré-condição: 'id' é o ID do paciente.
+// Pós-condição: O histórico do paciente é impresso na tela. Se o paciente não for encontrado, uma mensagem de erro ...
+// ... é exibida.
 void PatientList::printPatientHistory(int id){
     NodeList *p = nullptr;
     if (searchPatient(id, p)) {

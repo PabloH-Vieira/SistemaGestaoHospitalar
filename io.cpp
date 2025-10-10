@@ -7,7 +7,8 @@
 #define PATIENT_FILE "patients.dat"
 #define WAITLIST_FILE "waitlist.dat"
 
-// ao sair do programa armazena tudo
+// Pré-condição: pList e wList são ponteiros válidos para uma PatientList e uma WaitList.
+// Pós-condição: Os dados de pList e wList são salvos nos arquivos "patients.dat" e "waitlist.dat".
 void saveAll(PatientList* pList, WaitList* wList) {
     std::ofstream patientFile(PATIENT_FILE);
     if (patientFile.is_open()) {
@@ -46,7 +47,9 @@ void saveAll(PatientList* pList, WaitList* wList) {
     }
 }
 
-// recarrega ao abrir o programa
+// Pré-condição: pList e wList são ponteiros para listas vazias. Os arquivos "patients.dat" e "waitlist.dat" devem ...
+// ... existir ou estar vazios.
+// Pós-condição: pList e wList são preenchidos com os dados carregados dos arquivos.
 void loadAll(PatientList* pList, WaitList* wList) {
     std::ifstream patientFile(PATIENT_FILE);
     std::string line;

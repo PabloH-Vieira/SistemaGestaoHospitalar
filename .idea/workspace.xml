@@ -27,10 +27,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26fd01f6-729c-4324-b0e8-922b57c0581e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/.cmake/api/v1/reply/cache-v2-9c916f1583f282e7b10d.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/.cmake/api/v1/reply/cmakeFiles-v1-fd56f6bb39ea2b65e16b.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/.cmake/api/v1/reply/index-2025-10-09T23-24-34-0465.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/hospital.dir/compiler_depend.internal" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/hospital.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/hospital.dir/compiler_depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/hospital.exe" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +114,8 @@
       <option name="presentableId" value="Default" />
       <updated>1759963664249</updated>
       <workItem from="1759963665822" duration="3331000" />
-      <workItem from="1760060009640" duration="1000" />
+      <workItem from="1760060009640" duration="71000" />
+      <workItem from="1760060194337" duration="6000" />
     </task>
     <servers />
   </component>

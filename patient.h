@@ -7,10 +7,11 @@ typedef struct Patient{
     std::string name;
     int id;
     History history;
+    int priority;
 
     Patient();
     ~Patient();
-    void set(const char* new_name, int new_id);
+    void set(const char* new_name, int new_id, int priority);
     std::string get();
     int getID();
 } Patient;

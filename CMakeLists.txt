@@ -10,4 +10,7 @@ add_executable(hospital
         history.cpp
         wait_list.cpp
         io.cpp
+        prioritylist.cpp
+        prioritylist.cpp
+        prioritylist.h
 )

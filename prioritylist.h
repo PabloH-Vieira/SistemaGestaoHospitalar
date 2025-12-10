@@ -30,6 +30,7 @@ typedef struct PriorityList {
 	int size();
 	Patient removeHighestPriority();
 	Patient getHighestPriority();
+	Patient* find(NodeHeap* root, int id);
 
 	// Funções auxiliares para manter a propriedade do heap
 	void siftUp(NodeHeap* node);

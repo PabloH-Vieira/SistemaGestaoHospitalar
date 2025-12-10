@@ -1,6 +1,8 @@
 #include "prioritylist.h"
 #include <cmath>
 
+#include "patient_list.h"
+
 // Função para comparar a prioridade de dois pacientes
 // Retorna true se p1 tem maior prioridade que p2
 // Também retorna true se as prioridades forem iguais, mas p1 possuir um ID mais antigo (menor)
@@ -177,4 +179,25 @@ void PriorityList::siftDown(NodeHeap* root) {
         swapPatients(root->patient, top->patient);
         root = top; // Continua a descida a partir da nova posição
     }
+}
+
+Patient* PriorityList::find(NodeHeap* root, int id) {
+    // Se a árvore é vazia, retorna null
+    if (!root) {
+        return nullptr;
+    }
+
+    //Se o ID do paciente está no nó atual, encontramos
+    if (root->patient.id == id) {
+        return &(root->patient);
+    }
+
+    //Busca recursivamente na subárvore esquerda
+    Patient* foundLeft = find(root->left, id);
+    if (foundLeft) {
+        return foundLeft;
+    }
+
+    // Se não foi encontrado à esquerda, busca na subárvore direita
+    return find(root->right, id);
 }

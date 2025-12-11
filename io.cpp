@@ -1,96 +1,99 @@
 #include "io.h"
 #include <fstream>
-#include <string>
 #include <vector>
-#include <algorithm>
+#include <string>
 
-#define PATIENT_FILE "patients.dat"
-#define WAITLIST_FILE "waitlist.dat"
+#define PATIENT_FILE "patients_v2.dat"
+#define WAITLIST_FILE "queue_v2.dat"
 
-// Pré-condição: pList e wList são ponteiros válidos para uma PatientList e uma WaitList.
-// Pós-condição: Os dados de pList e wList são salvos nos arquivos "patients.dat" e "waitlist.dat".
-void saveAll(PatientList* pList, WaitList* wList) {
-    std::ofstream patientFile(PATIENT_FILE);
-    if (patientFile.is_open()) {
-        NodeList* current = pList->head;
-        while (current != nullptr) {
-            patientFile << current->patient.id << std::endl;
-            patientFile << current->patient.name << std::endl;
+void saveTree(NodeTree* node, std::ofstream& file) {
+    if (!node) return;
+    file << node->patient.id << std::endl;
+    file << node->patient.name << std::endl;
+    file << node->patient.priority << std::endl;
+    file << node->patient.arrivalSequence << std::endl;
 
-            NodeH* historyNode = current->patient.history.top;
-            patientFile << current->patient.history.cont_procedures << std::endl;
-
-            std::vector<std::string> procedures;
-            while(historyNode != nullptr){
-                procedures.push_back(historyNode->procedure);
-                historyNode = historyNode->next;
-            }
-            // salva ao contrario pra recarregar na ordem certa
-            std::reverse(procedures.begin(), procedures.end());
-            for(const auto& proc : procedures){
-                patientFile << proc << std::endl;
-            }
-            current = current->next;
-        }
-        patientFile.close();
+    file << node->patient.history.cont_procedures << std::endl;
+    NodeH* cur = node->patient.history.top;
+    std::vector<std::string> procs;
+    while(cur){
+        procs.push_back(cur->procedure);
+        cur = cur->next;
     }
+    for(int i = procs.size()-1; i>=0; i--) file << procs[i] << std::endl;
 
-    // salva os id's da lista de espera
-    std::ofstream waitListFile(WAITLIST_FILE);
-    if (waitListFile.is_open()) {
-        NodeHeap* current = wList->head;
-        while (current != nullptr) {
-            waitListFile << current->patient.id << std::endl;
-            current = current->next;
+    saveTree(node->left, file);
+    saveTree(node->right, file);
+}
+
+void saveAll(PatientList* pList, PriorityList* wList) {
+    std::ofstream pFile(PATIENT_FILE);
+    if (pFile.is_open()) {
+        saveTree(pList->root, pFile);
+        pFile.close();
+    }
+    std::ofstream wFile(WAITLIST_FILE);
+    if (wFile.is_open()) {
+        if (wList->root) {
+            std::vector<NodeHeap*> q;
+            q.push_back(wList->root);
+            int head = 0;
+            while(head < (int)q.size()){
+                 NodeHeap* curr = q[head++];
+                 wFile << curr->patient->id << std::endl;
+                 if(curr->left) q.push_back(curr->left);
+                 if(curr->right) q.push_back(curr->right);
+            }
         }
-        waitListFile.close();
+        wFile.close();
     }
 }
 
-// Pré-condição: pList e wList são ponteiros para listas vazias. Os arquivos "patients.dat" e "waitlist.dat" devem ...
-// ... existir ou estar vazios.
-// Pós-condição: pList e wList são preenchidos com os dados carregados dos arquivos.
-void loadAll(PatientList* pList, WaitList* wList) {
-    std::ifstream patientFile(PATIENT_FILE);
+void loadAll(PatientList* pList, PriorityList* wList) {
+    std::ifstream pFile(PATIENT_FILE);
     std::string line;
-    if (patientFile.is_open()) {
-        while (getline(patientFile, line)) {
+    if (pFile.is_open()) {
+        while (getline(pFile, line)) {
+            if(line.empty()) continue;
             Patient p;
             p.id = std::stoi(line);
-            getline(patientFile, p.name);
+            getline(pFile, p.name);
+            getline(pFile, line);
+            p.priority = std::stoi(line);
+            getline(pFile, line);
+            p.arrivalSequence = std::stoi(line);
 
-            getline(patientFile, line);
-            int numProcedures = std::stoi(line);
-            for (int i = 0; i < numProcedures; ++i) {
-                getline(patientFile, line);
-                p.history.insertProcedure(line);
-            }
+            getline(pFile, line);
+            int n = std::stoi(line);
 
-            NodeList* newNode = new NodeList();
-            newNode->patient = p;
-            if(pList->isEmpty()){
-                pList->head = newNode;
-                pList->tail = newNode;
+            // Insere primeiro na árvore
+            pList->addPatientDirect(p);
+            // Pega o ponteiro final
+            Patient* storedP = pList->getPatientPtr(p.id);
+            // Carrega historico direto no ponteiro final
+            if (storedP) {
+                for(int i=0; i<n; i++){
+                    getline(pFile, line);
+                    storedP->history.insertProcedure(line);
+                }
             } else {
-                pList->tail->next = newNode;
-                newNode->prev = pList->tail;
-                pList->tail = newNode;
+                for(int i=0; i<n; i++) getline(pFile, line);
             }
-            pList->qtd++;
         }
-        patientFile.close();
+        pFile.close();
     }
 
-    // recarrega a fila de espera
-    std::ifstream waitListFile(WAITLIST_FILE);
-    if (waitListFile.is_open()) {
-        while (getline(waitListFile, line)) {
+    std::ifstream wFile(WAITLIST_FILE);
+    if (wFile.is_open()) {
+        while (getline(wFile, line)) {
+            if(line.empty()) continue;
             int id = std::stoi(line);
-            NodeList* pNode = nullptr;
-            if (pList->searchPatient(id, pNode)) {
-                wList->addPatient(pNode->patient);
+            Patient* pPtr = pList->getPatientPtr(id);
+            if (pPtr) {
+                // Restaura na fila com a sequência original
+                wList->addPatient(pPtr, pPtr->arrivalSequence);
             }
         }
-        waitListFile.close();
+        wFile.close();
     }
 }

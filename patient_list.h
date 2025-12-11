@@ -2,40 +2,40 @@
 #define PATIENT_LIST_H
 #include "patient.h"
 
-//Nó para a lista de pacientes
-typedef struct NodeList{
+struct NodeTree{
     Patient patient;
-    struct NodeList *next;
-    struct NodeList *prev;
+    NodeTree *left;
+    NodeTree *right;
+    NodeTree(){ left = nullptr; right = nullptr; }
+};
 
-    //Define valores pré-definidos
-    NodeList(){
-        next = nullptr;
-        prev = nullptr;
-    }
-} NodeList;
-
-//Guarda as informações dos pacientes e o histórico de tratamento
-//Dinâmica e ordenada por id
 typedef struct PatientList{
-    NodeList *head;
-    NodeList *tail;
+    NodeTree *root;
     int qtd;
 
-    //Construtor
     PatientList();
-    //Destrutor
     ~PatientList();
 
-    //MÉTODOS
+    void destroyTree(NodeTree* node);
+    NodeTree* insertRecursive(NodeTree* node, Patient p);
+    NodeTree* searchRecursive(NodeTree* node, int id);
+    NodeTree* removeRecursive(NodeTree* node, int id, bool &success);
+    NodeTree* findMin(NodeTree* node);
+    void printInOrder(NodeTree* node);
+
     bool isEmpty();
-    int getID(); //Identfica o próximo ID disponível
-    bool addPatient(const char* name);
-    // to passando por ref pra ver fora da funcao
-    bool searchPatient(int id, NodeList*& p_out);
+    int getNextID();
+
+    Patient* getPatientPtr(int id); // Retorna ponteiro para Heap
+
+    int addPatient(const char* name, int priority); // Retorna ID
+    bool addPatientDirect(Patient p); // Para IO
+
+    bool searchPatient(int id);
     bool removePatient(int id);
     void printPatientHistory(int id);
+    void listAllPatients();
 
 } PatientList;
 
-#endif //PATIENT_LIST_H
+#endif

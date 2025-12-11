@@ -3,41 +3,39 @@
 
 #include "patient.h"
 
-// Nó da árvore/heap
 struct NodeHeap {
-	Patient patient;
+	Patient* patient;
 	NodeHeap* parent;
 	NodeHeap* left;
 	NodeHeap* right;
-
-	// Construtor do nó
-	NodeHeap(const Patient& p, NodeHeap* par = nullptr)
+	NodeHeap(Patient* p, NodeHeap* par = nullptr)
 		: patient(p), parent(par), left(nullptr), right(nullptr) {}
 };
 
 typedef struct PriorityList {
-	NodeHeap
-	* root;
+	NodeHeap *root;
 	int nodeCount;
+	int sequenceCounter;
 
-	// Construtor
 	PriorityList();
-	// Destrutor
 	~PriorityList();
 
-	void addPatient(const Patient& p);
+	// restoredSeq: Se != -1, usa esse valor em vez de gerar novo (para Load)
+	void addPatient(Patient* p, int restoredSeq = -1);
+	Patient* removeHighestPriority();
+
 	bool isEmpty();
 	int size();
-	Patient removeHighestPriority();
-	Patient getHighestPriority();
-	Patient* find(NodeHeap* root, int id);
+	bool search(int id);
+	bool searchRecursive(NodeHeap* node, int id);
 
-	// Funções auxiliares para manter a propriedade do heap
 	void siftUp(NodeHeap* node);
 	void siftDown(NodeHeap* node);
-
-	// Função auxiliar para o destrutor
 	void clear(NodeHeap* node);
+
+	// Imprime ordenado para visualização
+	void printList();
+
 } PriorityList;
 
-#endif //PRIORITYLIST_H
+#endif
